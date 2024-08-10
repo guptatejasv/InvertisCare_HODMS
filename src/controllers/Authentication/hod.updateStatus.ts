@@ -6,7 +6,7 @@ import { HOD } from "../../model/official.HOD";
 
 export const updateStatus = async (req: Request, res: Response) => {
   try {
-    const { action } = req.body;
+    const { action } = req.query;
     const userID = req.user.id;
     const compId = req.params.id;
     const hod = await HOD.findById(userID);
@@ -25,7 +25,7 @@ export const updateStatus = async (req: Request, res: Response) => {
         await transporter.sendMail({
           from: process.env.EMAIL_USER,
           to: student.email,
-          subject: "InvertisCare: Complaint Submission Confirmation",
+          subject: "InvertisCare: Complaint Status Update",
           text: `Your Complaint with ${compId} at InvertisCare is updated by ${hod?.name}(Head of Department) and changed status to "${action}".\nPlease keep checking your mail for future updates.`,
         });
       }
