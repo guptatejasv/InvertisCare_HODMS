@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Complaint from "../../model/officail.complaint";
+import Complaint from "../../model/official.complaint";
 import { transporter } from "../../helper/nodemailer";
 import { Student } from "../../model/student.user";
 import { HOD } from "../../model/official.HOD";

@@ -3,6 +3,7 @@ import mongoose, { Document, ObjectId, Schema } from "mongoose";
 // Interface to represent a complaint document
 export interface IComment extends Document {
   complaintId: ObjectId;
+  studentRefId: ObjectId;
   HODId?: ObjectId;
   DeanId?: ObjectId;
   ChiedId?: ObjectId;
@@ -18,6 +19,10 @@ export interface IComment extends Document {
 const ComplaintSchema: Schema = new Schema(
   {
     complaintId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+    },
+    studentRefId: {
       type: Schema.Types.ObjectId,
       required: true,
     },

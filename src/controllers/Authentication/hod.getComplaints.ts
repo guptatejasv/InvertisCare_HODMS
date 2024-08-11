@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Complaint from "../../model/officail.complaint";
+import Complaint from "../../model/official.complaint";
 import { HOD } from "../../model/official.HOD";
 
 export const getComplaints = async (req: Request, res: Response) => {
