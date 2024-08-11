@@ -8,8 +8,6 @@ import { updateStatus } from "../controllers/Authentication/hod.updateStatus";
 import { addComment } from "../controllers/Authentication/hod.comment";
 import { getComments } from "../controllers/Authentication/hod.getComments";
 import { updateComment } from "../controllers/Authentication/hod.updateComments";
-import { DeanRegister } from "../controllers/Authentication/Deans/dean.register";
-import { Deanlogin } from "../controllers/Authentication/Deans/dean.login";
 import { getDeans } from "../controllers/Authentication/hod.getDeans";
 import { escalatedTo } from "../controllers/Authentication/hod.escalate";
 import { getProfile } from "../controllers/Authentication/hod.getProfile";
@@ -32,9 +30,5 @@ router.get("/hod/getDeans", verify_token, getDeans);
 router.patch("/hod/escalatedTo/:id", verify_token, escalatedTo);
 router.get("/hod/getNotifications", verify_token, getNotifications);
 router.patch("/hod/readNotificaion/:id", verify_token, readNotification);
-
-// Dean routes
-router.post("/auth/dean/register", DeanRegister);
-router.post("/auth/dean/login", Deanlogin);
 
 export default router;
