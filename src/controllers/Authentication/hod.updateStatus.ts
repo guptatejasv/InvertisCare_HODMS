@@ -6,14 +6,14 @@ import { HOD } from "../../model/official.HOD";
 
 export const updateStatus = async (req: Request, res: Response) => {
   try {
-    const { action } = req.query;
+    const { status } = req.body;
     const userID = req.user.id;
     const compId = req.params.id;
     const hod = await HOD.findById(userID);
     const updateStatus = await Complaint.findByIdAndUpdate(
       compId,
       {
-        status: action,
+        status,
       },
       {
         new: true,
@@ -21,12 +21,47 @@ export const updateStatus = async (req: Request, res: Response) => {
     );
     const student = await Student.findById(updateStatus?.studentRefId);
     if (student) {
-      if (action == "In Progress") {
+      if (status == "In progress") {
         await transporter.sendMail({
           from: process.env.EMAIL_USER,
           to: student.email,
           subject: "InvertisCare: Complaint Status Update",
-          text: `Your Complaint with ${compId} at InvertisCare is updated by ${hod?.name}(Head of Department) and changed status to "${action}".\nPlease keep checking your mail for future updates.`,
+          text: `Your Complaint with ${compId} at InvertisCare is updated by ${hod?.name}(Head of Department) and changed status to "${status}".\nPlease keep checking your mail for future updates.`,
+        });
+      } else if (status == "Resolved") {
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: student.email,
+          subject: "InvertisCare: Complaint Status Update",
+          text: `Your Complaint with ${compId} at InvertisCare is updated by ${hod?.name}(Head of Department) and changed status to "${status}".\nPlease keep checking your mail for future updates.`,
+        });
+      } else if (status == "Pending") {
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: student.email,
+          subject: "InvertisCare: Complaint Status Update",
+          text: `Your Complaint with ${compId} at InvertisCare is updated by ${hod?.name}(Head of Department) and changed status to "${status}".\nPlease keep checking your mail for future updates.`,
+        });
+      } else if (status == "Escalated To Dean") {
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: student.email,
+          subject: "InvertisCare: Complaint Status Update",
+          text: `Your Complaint with ${compId} at InvertisCare is updated by ${hod?.name}(Head of Department) and changed status to "${status}".\nPlease keep checking your mail for future updates.`,
+        });
+      } else if (status == "Escalated To Chief") {
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: student.email,
+          subject: "InvertisCare: Complaint Status Update",
+          text: `Your Complaint with ${compId} at InvertisCare is updated by ${hod?.name}(Head of Department) and changed status to "${status}".\nPlease keep checking your mail for future updates.`,
+        });
+      } else if (status == "Closed") {
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: student.email,
+          subject: "InvertisCare: Complaint Status Update",
+          text: `Your Complaint with ${compId} at InvertisCare is updated by ${hod?.name}(Head of Department) and changed status to "${status}".\nPlease keep checking your mail for future updates.`,
         });
       }
     }

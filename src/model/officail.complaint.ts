@@ -54,7 +54,13 @@ const ComplaintSchema: Schema = new Schema(
     },
     status: {
       type: String,
-      enum: ["Pending", "In Progress", "Resolved", "Closed"],
+      enum: [
+        "Pending",
+        "In Progress",
+        "Resolved",
+        "Closed",
+        "Escalated To Dean",
+      ],
       default: "Pending",
       required: true,
     },
