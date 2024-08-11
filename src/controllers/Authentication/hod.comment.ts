@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import Complaint from "../../model/officail.complaint";
-import { transporter } from "../../helper/nodemailer";
-import { HOD } from "../../model/official.HOD";
-import Comment from "../../model/complaint.comment";
-import { Student } from "../../model/student.user";
+import Complaint from "../model/officail.complaint";
+import { transporter } from "../helper/nodemailer";
+import { HOD } from "../model/official.HOD";
+import Comment from "../model/complaint.comment";
+import { Student } from "../model/student.user";
 export const addComment = async (req: Request, res: Response) => {
   try {
     const userId = req.user.id;

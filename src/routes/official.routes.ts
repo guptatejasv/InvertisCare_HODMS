@@ -1,5 +1,4 @@
 import { Router } from "express";
-// import { verify_token } from "../helper/jwtVerify";
 import { register } from "../controllers/Authentication/hod.register";
 import { login } from "../controllers/Authentication/hod.login";
 import { verify_token } from "../helper/jwtVerify";
