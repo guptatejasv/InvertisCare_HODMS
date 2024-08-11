@@ -8,7 +8,9 @@ export const getComplaints = async (req: Request, res: Response) => {
     const hod = await HOD.findById(userId);
     if (hod) {
       if (hod.role == "HOD") {
-        const complaint = await Complaint.find();
+        const complaint = await Complaint.find({
+          assignedTo: userId,
+        });
         if (!complaint) {
           return res.status(400).json({
             status: "fail",

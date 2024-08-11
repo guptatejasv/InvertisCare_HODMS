@@ -1,21 +1,21 @@
 import { Request, Response } from "express";
-import { HOD } from "../../model/official.HOD";
+import { Dean } from "../../../model/official.deans";
 import bcrypt from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-export const HodLogin = async (req: Request, res: Response) => {
+export const Deanlogin = async (req: Request, res: Response) => {
   try {
     const { officialId, password } = req.body;
     if (!officialId || !password) {
       res.status(401).json({
         status: "fail",
-        message: "Please enter Student Id and Password both..",
+        message: "Please enter Official Id and Password both..",
       });
     }
-    const user = await HOD.findOne({ HODId: officialId }).select("+password");
+    const user = await Dean.findOne({ DeanId: officialId }).select("+password");
 
     if (!user || user.isDeleted == true) {
       return res.status(404).json({ message: "User not found" });

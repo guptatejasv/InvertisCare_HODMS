@@ -3,7 +3,7 @@ import Complaint from "../../model/official.complaint";
 import { transporter } from "../../helper/nodemailer";
 import { Student } from "../../model/student.user";
 import { HOD } from "../../model/official.HOD";
-
+import Notification from "../../model/student.notificaitons";
 export const reviewComplaint = async (req: Request, res: Response) => {
   try {
     const userId = req.user.id;
@@ -27,6 +27,12 @@ export const reviewComplaint = async (req: Request, res: Response) => {
         });
       }
     }
+    await Notification.create({
+      studentRefId: complaint.studentRefId,
+      message:
+        "Your Complaint with ${compId} at InvertisCare is reviewed Carefully by ${hod?.name}(Head of Department)",
+      type: "Complaint Update",
+    });
 
     res.status(200).json({
       status: "success",
