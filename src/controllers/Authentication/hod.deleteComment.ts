@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Comment from "../../model/complaint.comment";
-export const updateComment = async (req: Request, res: Response) => {
+export const deleteComment = async (req: Request, res: Response) => {
   try {
     const commentId = req.params.id;
 

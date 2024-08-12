@@ -14,6 +14,7 @@ import { getProfile } from "../controllers/Authentication/hod.getProfile";
 import { updateProfile } from "../controllers/Authentication/hod.updateProfile";
 import { getNotifications } from "../controllers/Authentication/hod.getNotfications";
 import { readNotification } from "../controllers/Authentication/hod.markReadNotification";
+import { deleteComment } from "../controllers/Authentication/hod.deleteComment";
 
 const router = Router();
 router.post("/auth/hod/register", HodRegister);
@@ -26,6 +27,7 @@ router.patch("/hod/updateStatus/:id", verify_token, updateStatus);
 router.post("/hod/addComment/:id", verify_token, addComment);
 router.get("/hod/getComments/:id", verify_token, getComments);
 router.get("/hod/updateComment/:id", verify_token, updateComment);
+router.delete("/hod/deleteComment/:id", verify_token, deleteComment);
 router.get("/hod/getDeans", verify_token, getDeans);
 router.patch("/hod/escalatedTo/:id", verify_token, escalatedTo);
 router.get("/hod/getNotifications", verify_token, getNotifications);
