@@ -7,18 +7,22 @@ import Notification from "../../model/student.notificaitons";
 export const updateStatus = async (req: Request, res: Response) => {
   try {
     const { status } = req.body;
-    const userID = req.user.id;
+    const userId = req.user.id;
     const compId = req.params.id;
-    const hod = await HOD.findById(userID);
-    const updateStatus = await Complaint.findByIdAndUpdate(
-      compId,
-      {
-        status,
-      },
-      {
-        new: true,
-      }
-    );
+    const hod = await HOD.findById(userId);
+    const updateStatus = await Complaint.findById(compId);
+
+    if (updateStatus?.assignedTo.toString() !== userId) {
+      return res.status(400).json({
+        status: "fail",
+        message: "You are not authrized to update this complaint",
+      });
+    }
+    if (updateStatus) {
+      updateStatus.status = status;
+      await updateStatus.save();
+    }
+
     const student = await Student.findById(updateStatus?.studentRefId);
     if (student) {
       if (status == "In progress") {

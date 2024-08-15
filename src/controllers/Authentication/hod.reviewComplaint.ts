@@ -8,8 +8,18 @@ export const reviewComplaint = async (req: Request, res: Response) => {
   try {
     const userId = req.user.id;
     const compId = req.params.id;
-    const complaint = await Complaint.findById(compId);
+    const complaint = await Complaint.findById(compId)
+      .populate("studentRefId")
+      .exec();
+
+    if (complaint?.assignedTo.toString() !== userId) {
+      return res.status(400).json({
+        status: "fail",
+        message: "You are not authrized to get this complaint",
+      });
+    }
     const hod = await HOD.findById(userId);
+
     if (!complaint) {
       return res.status(400).json({
         status: "fail",
@@ -29,8 +39,7 @@ export const reviewComplaint = async (req: Request, res: Response) => {
     }
     await Notification.create({
       studentRefId: complaint.studentRefId,
-      message:
-        "Your Complaint with ${compId} at InvertisCare is reviewed Carefully by ${hod?.name}(Head of Department)",
+      message: `Your Complaint with ${compId} at InvertisCare is reviewed Carefully by ${hod?.name}(Head of Department)`,
       type: "Complaint Update",
     });
 

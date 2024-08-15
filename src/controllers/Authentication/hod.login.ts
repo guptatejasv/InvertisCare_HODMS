@@ -31,7 +31,11 @@ export const HodLogin = async (req: Request, res: Response) => {
     const token = sign({ id: user._id }, secret, {
       expiresIn: "90d",
     });
-    // localStorage.setItem("authToken", token);
+
+    res.cookie("jwt", token, {
+      expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    });
     if (user && isMatch) {
       res.status(200).json({
         status: "success",

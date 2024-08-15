@@ -4,13 +4,19 @@ export const deleteComment = async (req: Request, res: Response) => {
   try {
     const commentId = req.params.id;
 
-    await Comment.findByIdAndUpdate(
-      commentId,
-      {
-        isDeleted: true,
-      },
-      { new: true }
-    );
+    const comment = await Comment.findById(commentId);
+    if (comment) {
+      if (comment.HODId) {
+        comment.isDeleted = true;
+        await comment.save();
+      } else {
+        return res.status(203).json({
+          status: "fail",
+          message: "You are not autherized to delete this Comment",
+        });
+      }
+    }
+
     res.status(200).json({
       status: "success",
       message: "Comment is deleted successfully",

@@ -11,13 +11,13 @@ export const updateComment = async (req: Request, res: Response) => {
         message: "You can't update this comment. This comment id deleted",
       });
     }
-    const updatedComment = await Comment.findByIdAndUpdate(
-      commentId,
-      {
-        commentByHOD: comment,
-      },
-      { new: true }
-    );
+    const updatedComment = await Comment.findById(commentId);
+    if (updatedComment) {
+      if (updatedComment.HODId) {
+        updatedComment.commentByHOD = comment;
+        await updatedComment.save();
+      }
+    }
 
     res.status(200).json({
       status: "success",
