@@ -4,7 +4,7 @@ import { Dean } from "../../model/official.deans";
 export const getDeans = async (req: Request, res: Response) => {
   try {
     const deans = await Dean.find().select("-DeanId -dob");
-    res.status(200).jsonp({
+    res.status(200).json({
       status: "success",
       deans,
     });
