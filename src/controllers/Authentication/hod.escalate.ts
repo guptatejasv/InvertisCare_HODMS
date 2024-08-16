@@ -21,6 +21,7 @@ export const escalatedToDean = async (req: Request, res: Response) => {
     }
     const complaint = await Complaint.findById(compId);
     if (complaint) {
+      complaint.status = "Escalated To Dean";
       complaint.escalatedToDean = escalatedToDean;
       await complaint.save();
     }

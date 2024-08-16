@@ -46,13 +46,6 @@ export const updateStatus = async (req: Request, res: Response) => {
           subject: "InvertisCare: Complaint Status Update",
           text: `Your Complaint with ${compId} at InvertisCare is updated by ${hod?.name}(Head of Department) and changed status to "${status}".\nPlease keep checking your mail for future updates.`,
         });
-      } else if (status == "Escalated To Dean") {
-        await transporter.sendMail({
-          from: process.env.EMAIL_USER,
-          to: student.email,
-          subject: "InvertisCare: Complaint Status Update",
-          text: `Your Complaint with ${compId} at InvertisCare is updated by ${hod?.name}(Head of Department) and changed status to "${status}".\nPlease keep checking your mail for future updates.`,
-        });
       } else if (status == "Closed") {
         await transporter.sendMail({
           from: process.env.EMAIL_USER,
