@@ -15,10 +15,14 @@ import { updateProfile } from "../controllers/Authentication/hod.updateProfile";
 import { getNotifications } from "../controllers/Authentication/hod.getNotfications";
 import { readNotification } from "../controllers/Authentication/hod.markReadNotification";
 import { deleteComment } from "../controllers/Authentication/hod.deleteComment";
+import { forgetPassword } from "../controllers/Authentication/hod.forgetPassword";
+import { resetPassword } from "../controllers/Authentication/hod.resetPassword";
 
 const router = Router();
 router.post("/auth/hod/register", HodRegister);
 router.post("/auth/hod/login", HodLogin);
+router.post("/auth/hod/forgetPassword", forgetPassword);
+router.patch("/auth/hod/resetPassword/:token", resetPassword);
 router.get("/hod/getProfile", verify_token, getProfile);
 router.patch("/hod/updateProfile", verify_token, updateProfile);
 router.get("/hod/getComplaints", verify_token, getComplaints);

@@ -12,6 +12,9 @@ export interface IHOD extends Document {
   photo?: string;
   isDeleted?: boolean;
   isBlocked?: boolean;
+  passwordChangedAt?: Date;
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
 }
 
 const AuthSchema: Schema = new Schema(
@@ -60,6 +63,9 @@ const AuthSchema: Schema = new Schema(
     isBlocked: {
       type: Boolean,
     },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
   },
   {
     timestamps: true,
