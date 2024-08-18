@@ -17,6 +17,7 @@ import { readNotification } from "../controllers/Authentication/hod.markReadNoti
 import { deleteComment } from "../controllers/Authentication/hod.deleteComment";
 import { forgetPassword } from "../controllers/Authentication/hod.forgetPassword";
 import { resetPassword } from "../controllers/Authentication/hod.resetPassword";
+import { search } from "../controllers/Authentication/hod.search";
 
 const router = Router();
 router.post("/auth/hod/register", HodRegister);
@@ -36,5 +37,6 @@ router.get("/hod/getDeans", verify_token, getDeans);
 router.patch("/hod/escalatedTo/:id", verify_token, escalatedToDean);
 router.get("/hod/getNotifications", verify_token, getNotifications);
 router.patch("/hod/readNotificaion/:id", verify_token, readNotification);
+router.post("/hod/search", verify_token, search);
 
 export default router;
