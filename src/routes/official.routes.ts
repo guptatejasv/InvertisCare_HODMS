@@ -18,13 +18,25 @@ import { deleteComment } from "../controllers/Authentication/hod.deleteComment";
 import { forgetPassword } from "../controllers/Authentication/hod.forgetPassword";
 import { resetPassword } from "../controllers/Authentication/hod.resetPassword";
 import { search } from "../controllers/Authentication/hod.search";
+import { resizeUserPhoto, uploadUserPhoto } from "../helper/multer";
 
 const router = Router();
-router.post("/auth/hod/register", HodRegister);
+router.post(
+  "/auth/hod/register",
+  uploadUserPhoto,
+  resizeUserPhoto,
+  HodRegister
+);
 router.post("/auth/hod/login", HodLogin);
 router.post("/auth/hod/forgetPassword", forgetPassword);
 router.patch("/auth/hod/resetPassword/:token", resetPassword);
-router.get("/hod/getProfile", verify_token, getProfile);
+router.get(
+  "/hod/getProfile",
+  verify_token,
+  uploadUserPhoto,
+  resizeUserPhoto,
+  getProfile
+);
 router.patch("/hod/updateProfile", verify_token, updateProfile);
 router.get("/hod/getComplaints", verify_token, getComplaints);
 router.get("/hod/reviewComplaint/:id", verify_token, reviewComplaint);
